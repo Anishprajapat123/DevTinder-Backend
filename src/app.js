@@ -2,16 +2,20 @@ const express = require("express")
 
 const app = express();
 
-const { adminAuth , userAuth } = require("./middlewares/auth")
-app.use("/admin",adminAuth)
-
-app.get("/admin/allUserData",(req,res)=>{
-    res.send("All data sent");
+app.get("/user",(req,res)=>{
+    try{
+    throw new error("abcdef");
+    res.send("succuss");
+    }
+    catch(err){res.send("catch block executed")};
 })
 
-app.get("/user",userAuth,(req,res)=>{
-    res.send("user data authorized");
+app.use("/",(err,req,res,next)=>{
+    if(err){
+        res.status(500).send("something went wrong");
+    }
 })
+
 
 app.listen(3000,()=>{
     console.log("server successfulyy");
