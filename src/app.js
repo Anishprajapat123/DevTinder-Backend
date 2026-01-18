@@ -17,6 +17,29 @@ app.use(express.json());
     }
  })
 
+ app.get("/user",async (req,res)=>{
+    const username= req.body.firstname;
+   try{
+    const user = await User.find({firstname: username});
+    if(user === 0){
+         res.status(400).send("something went wrong");
+    }
+    else
+    res.send(user);
+   }catch(err){
+    res.status(400).send("something went wrong");
+   }
+ })
+
+ app.get("/feed",async (req,res)=>{
+    
+    try{
+        const users= await User.find({});
+        res.send(users);
+    }catch(err){
+         res.status(400).send("something went wrong");
+    }
+ })
 
 
 connectDB().then(()=>{
