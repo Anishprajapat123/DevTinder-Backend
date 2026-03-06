@@ -12,7 +12,9 @@ const authRouter = require("./routes/auth")
 const profileRouter = require("./routes/profile")
 const requestRouter = require("./routes/request")
 
-app.use("/",authRouter , profileRouter, requestRouter)
+app.use("/",authRouter)
+app.use("/",profileRouter)
+app.use("/",requestRouter)
 connectDB().then(()=>{
     console.log("database connected successfully");
     app.listen(3000,()=>{
