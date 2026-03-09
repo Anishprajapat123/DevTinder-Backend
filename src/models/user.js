@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
     firstname: {
         type:String,
         required : true,
+        index: true,
         minLength: 4
     },
     lastname: {
@@ -37,7 +38,11 @@ const userSchema = new mongoose.Schema({
         min : 18,
     },
     gender: {
-        type:String,
+        type: String,
+        enum : {
+            values : ["male" , "female" , "others"],
+            message : '{VALUE} is not the gender type'
+        } , 
         validate(value){
             if(!["male","female","others"].includes(value)){
                 throw new Error("gender not valid");
@@ -65,6 +70,8 @@ const userSchema = new mongoose.Schema({
 {
     timestamps: true
 })
+
+userSchema.index({firstname: 1 , lastname : 1})
 
 userSchema.methods.getJWT = async function () {
     const user = this;

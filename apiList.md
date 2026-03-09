@@ -11,7 +11,10 @@
 - PATCH /profile/password
 
 ## connectionRequestRouter
-- POST /request/send/interested/:userId
+- POST /request/send/:status/:userId
+
+
+- POST /request/review/accepted/:requestId
 - POST /request/review/rejected/:requestId
 
 ## userRouter
@@ -19,4 +22,4 @@
 - GET /requests/received
 - GET/feed - Gets you to the profiles of the other users on the platform
 
-Status: ignore, interested, accepted, rejected
+Status: ignoreD, interested, accepted, rejected
